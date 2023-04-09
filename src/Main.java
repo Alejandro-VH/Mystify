@@ -1,11 +1,10 @@
 import edu.princeton.cs.stdlib.StdDraw;
-import edu.princeton.cs.stdlib.StdOut;
 
 import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        //Se establece la configuracion de la pantalla y varaibles a usar
+        //Se establece la configuracion de la pantalla y variables a usar
         double min = -1.0;
         double max = 1.0;
         StdDraw.setXscale(min,max);
@@ -27,7 +26,7 @@ public class Main {
         double vy = velRandom(), vy2 = vy;
 
         while (true){
-            StdDraw.clear();
+            StdDraw.clear(Color.black);
             //Se trazan las lineas
             for (int i = 0; i < 6; i++) {
                 StdDraw.setPenColor(cambiarColor(i));
@@ -93,14 +92,13 @@ public class Main {
 
     /**
      * Subprograma usado para entregar una velocidad al azar a las lineas
-     * @return el valor de la velocidad, limitado para evitar que se entreguen valores muy altos o muy bajos
+     * @return - el valor de la velocidad, limitado para evitar que se entreguen valores muy altos o muy bajos
      */
     public static double velRandom(){
         double vel = 1;
         while (vel > 0.05 || vel < 0.01){
             vel = ( 0.2 * Math.random());
         }
-        StdOut.println(vel);
         return vel;
     }
 }
