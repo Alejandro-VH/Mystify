@@ -1,4 +1,6 @@
 import edu.princeton.cs.stdlib.StdDraw;
+import edu.princeton.cs.stdlib.StdOut;
+
 import java.awt.*;
 
 public class Main {
@@ -21,14 +23,15 @@ public class Main {
         y0[0] = posRandom(min,max);
         y1[0] = posRandom(min,max);
         //Vectores de velocidad para cada punta de la linea
-        double vx = 0.012, vx2 = 0.012;
-        double vy = 0.032, vy2 = 0.032;
+        double vx = velRandom(), vx2 = vx;
+        double vy = velRandom(), vy2 = vy;
 
         while (true){
             StdDraw.clear();
             //Se trazan las lineas
             for (int i = 0; i < 6; i++) {
                 StdDraw.setPenColor(cambiarColor(i));
+
                 if (i==0){
                     StdDraw.line(x0[i], y0[i], x1[i], y1[i]);
                 }else {
@@ -36,7 +39,7 @@ public class Main {
                 }
             }
 
-            // Actualizar valores del arreglo
+            //Se actualizan los valores del arreglo
             for (int i = 5; i >= 1; i--) {
                 x0[i] = x0[i-1];
                 y0[i] = y0[i-1];
@@ -63,7 +66,6 @@ public class Main {
             if (Math.abs(y1[0] + vy2) > 1.0){
                 vy2 = -vy2;
             }
-
             StdDraw.show();
             StdDraw.pause(40);
         }
@@ -87,5 +89,18 @@ public class Main {
      */
     public static double posRandom(double min, double max){
         return min + (max - min) * Math.random();
+    }
+
+    /**
+     * Subprograma usado para entregar una velocidad al azar a las lineas
+     * @return el valor de la velocidad, limitado para evitar que se entreguen valores muy altos o muy bajos
+     */
+    public static double velRandom(){
+        double vel = 1;
+        while (vel > 0.05 || vel < 0.01){
+            vel = ( 0.2 * Math.random());
+        }
+        StdOut.println(vel);
+        return vel;
     }
 }
